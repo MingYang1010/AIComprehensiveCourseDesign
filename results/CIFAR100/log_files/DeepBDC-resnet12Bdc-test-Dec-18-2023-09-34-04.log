@@ -1,0 +1,122 @@
+2023-12-18 09:34:04,543 [INFO] core.test: {'data_root': '/root/autodl-tmp/data/CIFAR100', 'image_size': 84, 'use_memory': False, 'augment': True, 'augment_times': 1, 'augment_times_query': 1, 'workers': 8, 'dataloader_num': 1, 'device_ids': '0', 'n_gpu': 1, 'seed': 2147483647, 'deterministic': True, 'port': 37603, 'log_name': None, 'log_level': 'info', 'log_interval': 100, 'log_paramerter': False, 'result_root': './results', 'save_interval': 10, 'save_part': ['emb_func', 'cls_classifier'], 'tag': None, 'epoch': 200, 'test_epoch': 5, 'parallel_part': ['emb_func'], 'pretrain_path': './results/DeepBDC/DeepBDC-meta-miniImageNet-5-1/checkpoints/emb_func_best.pth', 'resume': False, 'way_num': 5, 'shot_num': 1, 'query_num': 15, 'test_way': 5, 'test_shot': 1, 'test_query': 15, 'episode_size': 2, 'train_episode': 600, 'test_episode': 600, 'batch_size': 64, 'val_per_epoch': 1, 'optimizer': {'kwargs': {'lr': 0.0001, 'momentum': 0.9, 'nesterov': True, 'weight_decay': 0.0005}, 'name': 'SGD', 'other': None}, 'lr_scheduler': {'kwargs': {'gamma': 0.1, 'milestones': [40, 80]}, 'name': 'MultiStepLR'}, 'warmup': 0, 'includes': ['headers/device.yaml', 'headers/misc.yaml', 'headers/model.yaml', 'headers/optimizer.yaml'], 'augment_method': 'DeepBdcAugment', 'backbone': {'kwargs': {'reduce_dim': 640}, 'name': 'resnet12Bdc'}, 'classifier': {'kwargs': None, 'name': 'DeepBDC'}, 'rank': 0, 'tb_scale': 1.0}
+2023-12-18 09:34:04,793 [INFO] core.test: DeepBDC(
+  (emb_func): resnet(
+    (layer1): Sequential(
+      (0): BasicBlockVariant(
+        (conv1): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): LeakyReLU(negative_slope=0.1)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (maxpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (downsample): Sequential(
+          (0): Conv2d(3, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (DropBlock): DropBlock()
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlockVariant(
+        (conv1): Conv2d(64, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): LeakyReLU(negative_slope=0.1)
+        (conv2): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(160, 160, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn3): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (maxpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 160, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(160, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (DropBlock): DropBlock()
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlockVariant(
+        (conv1): Conv2d(160, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): LeakyReLU(negative_slope=0.1)
+        (conv2): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(320, 320, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn3): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (maxpool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (downsample): Sequential(
+          (0): Conv2d(160, 320, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (DropBlock): DropBlock()
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlockVariant(
+        (conv1): Conv2d(320, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): LeakyReLU(negative_slope=0.1)
+        (conv2): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(640, 640, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn3): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (maxpool): MaxPool2d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+        (downsample): Sequential(
+          (0): Conv2d(320, 640, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(640, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (DropBlock): DropBlock()
+      )
+    )
+    (dropout): Dropout(p=0.0, inplace=False)
+    (bdc_pool): BdcPool()
+  )
+  (proto_layer): ProtoLayer()
+  (loss_func): CrossEntropyLoss()
+)
+2023-12-18 09:34:04,843 [INFO] core.test: Trainable params in the model: 12424321.
+2023-12-18 09:34:04,845 [INFO] core.test: Loading the state dict from ./results/DeepBDC-CIFAR100-resnet12Bdc-5-1-Dec-16-2023-23-38-05/checkpoints/model_best.pth.
+2023-12-18 09:34:10,719 [INFO] core.test: load 12000 test image with 20 label.
+2023-12-18 09:34:12,467 [INFO] core.test: ============ Testing on the test set ============
+2023-12-18 09:34:17,896 [INFO] core.test: Epoch-(0): [100/600]	Time 0.105 (0.108)	Calc 0.102 (0.097)	Data 0.001 (0.008)	Acc@1 40.000 (40.640)
+2023-12-18 09:34:22,875 [INFO] core.test: Epoch-(0): [200/600]	Time 0.098 (0.103)	Calc 0.095 (0.096)	Data 0.001 (0.004)	Acc@1 38.667 (40.440)
+2023-12-18 09:34:27,886 [INFO] core.test: Epoch-(0): [300/600]	Time 0.102 (0.102)	Calc 0.098 (0.096)	Data 0.002 (0.003)	Acc@1 42.667 (40.013)
+2023-12-18 09:34:32,870 [INFO] core.test: Epoch-(0): [400/600]	Time 0.100 (0.101)	Calc 0.095 (0.096)	Data 0.002 (0.003)	Acc@1 46.667 (40.630)
+2023-12-18 09:34:37,845 [INFO] core.test: Epoch-(0): [500/600]	Time 0.099 (0.101)	Calc 0.095 (0.095)	Data 0.001 (0.003)	Acc@1 46.000 (40.200)
+2023-12-18 09:34:42,854 [INFO] core.test: Epoch-(0): [600/600]	Time 0.101 (0.101)	Calc 0.097 (0.095)	Data 0.001 (0.002)	Acc@1 42.667 (40.138)
+2023-12-18 09:34:42,859 [INFO] core.test: Test Accuracy: 40.138	 h: 0.701
+2023-12-18 09:34:42,861 [INFO] core.test: ============ Testing on the test set ============
+2023-12-18 09:34:47,892 [INFO] core.test: Epoch-(1): [100/600]	Time 0.097 (0.100)	Calc 0.094 (0.095)	Data 0.001 (0.001)	Acc@1 42.000 (41.413)
+2023-12-18 09:34:52,907 [INFO] core.test: Epoch-(1): [200/600]	Time 0.103 (0.100)	Calc 0.095 (0.095)	Data 0.005 (0.001)	Acc@1 38.000 (41.480)
+2023-12-18 09:34:57,950 [INFO] core.test: Epoch-(1): [300/600]	Time 0.099 (0.100)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 37.333 (41.076)
+2023-12-18 09:35:02,983 [INFO] core.test: Epoch-(1): [400/600]	Time 0.100 (0.100)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 42.000 (41.377)
+2023-12-18 09:35:08,082 [INFO] core.test: Epoch-(1): [500/600]	Time 0.099 (0.100)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 43.333 (41.240)
+2023-12-18 09:35:13,072 [INFO] core.test: Epoch-(1): [600/600]	Time 0.099 (0.100)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 40.000 (41.027)
+2023-12-18 09:35:13,076 [INFO] core.test: Test Accuracy: 41.027	 h: 0.723
+2023-12-18 09:35:13,077 [INFO] core.test: ============ Testing on the test set ============
+2023-12-18 09:35:18,097 [INFO] core.test: Epoch-(2): [100/600]	Time 0.100 (0.100)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 49.333 (39.933)
+2023-12-18 09:35:23,170 [INFO] core.test: Epoch-(2): [200/600]	Time 0.102 (0.100)	Calc 0.095 (0.096)	Data 0.004 (0.001)	Acc@1 38.667 (40.553)
+2023-12-18 09:35:28,230 [INFO] core.test: Epoch-(2): [300/600]	Time 0.101 (0.100)	Calc 0.096 (0.096)	Data 0.002 (0.001)	Acc@1 40.667 (40.707)
+2023-12-18 09:35:33,275 [INFO] core.test: Epoch-(2): [400/600]	Time 0.104 (0.100)	Calc 0.095 (0.096)	Data 0.005 (0.001)	Acc@1 40.667 (40.167)
+2023-12-18 09:35:38,349 [INFO] core.test: Epoch-(2): [500/600]	Time 0.099 (0.100)	Calc 0.096 (0.096)	Data 0.001 (0.001)	Acc@1 39.333 (40.352)
+2023-12-18 09:35:43,426 [INFO] core.test: Epoch-(2): [600/600]	Time 0.100 (0.101)	Calc 0.096 (0.096)	Data 0.001 (0.001)	Acc@1 39.333 (40.367)
+2023-12-18 09:35:43,430 [INFO] core.test: Test Accuracy: 40.367	 h: 0.750
+2023-12-18 09:35:43,432 [INFO] core.test: ============ Testing on the test set ============
+2023-12-18 09:35:48,490 [INFO] core.test: Epoch-(3): [100/600]	Time 0.099 (0.101)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 40.000 (39.853)
+2023-12-18 09:35:53,524 [INFO] core.test: Epoch-(3): [200/600]	Time 0.099 (0.100)	Calc 0.096 (0.096)	Data 0.001 (0.001)	Acc@1 51.333 (40.467)
+2023-12-18 09:35:58,601 [INFO] core.test: Epoch-(3): [300/600]	Time 0.099 (0.100)	Calc 0.096 (0.096)	Data 0.001 (0.001)	Acc@1 27.333 (40.382)
+2023-12-18 09:36:03,688 [INFO] core.test: Epoch-(3): [400/600]	Time 0.100 (0.101)	Calc 0.096 (0.096)	Data 0.001 (0.001)	Acc@1 34.667 (40.123)
+2023-12-18 09:36:08,790 [INFO] core.test: Epoch-(3): [500/600]	Time 0.101 (0.101)	Calc 0.097 (0.096)	Data 0.001 (0.001)	Acc@1 44.667 (40.405)
+2023-12-18 09:36:13,835 [INFO] core.test: Epoch-(3): [600/600]	Time 0.099 (0.101)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 38.000 (40.580)
+2023-12-18 09:36:13,839 [INFO] core.test: Test Accuracy: 40.580	 h: 0.767
+2023-12-18 09:36:13,841 [INFO] core.test: ============ Testing on the test set ============
+2023-12-18 09:36:18,865 [INFO] core.test: Epoch-(4): [100/600]	Time 0.100 (0.100)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 37.333 (40.333)
+2023-12-18 09:36:23,910 [INFO] core.test: Epoch-(4): [200/600]	Time 0.103 (0.100)	Calc 0.099 (0.096)	Data 0.002 (0.001)	Acc@1 39.333 (40.093)
+2023-12-18 09:36:28,983 [INFO] core.test: Epoch-(4): [300/600]	Time 0.099 (0.100)	Calc 0.095 (0.096)	Data 0.001 (0.001)	Acc@1 37.333 (40.551)
+2023-12-18 09:36:34,044 [INFO] core.test: Epoch-(4): [400/600]	Time 0.100 (0.100)	Calc 0.095 (0.096)	Data 0.002 (0.001)	Acc@1 44.000 (40.373)
+2023-12-18 09:36:39,105 [INFO] core.test: Epoch-(4): [500/600]	Time 0.100 (0.100)	Calc 0.096 (0.096)	Data 0.001 (0.001)	Acc@1 43.333 (40.709)
+2023-12-18 09:36:44,191 [INFO] core.test: Epoch-(4): [600/600]	Time 0.101 (0.101)	Calc 0.097 (0.096)	Data 0.001 (0.001)	Acc@1 30.667 (40.696)
+2023-12-18 09:36:44,199 [INFO] core.test: Test Accuracy: 40.696	 h: 0.700
+2023-12-18 09:36:44,204 [INFO] core.test: Aver Accuracy: 40.561	 Aver h: 0.325
+2023-12-18 09:36:44,206 [INFO] core.test: ............Testing is end............
